@@ -14,32 +14,38 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 </head>
-<div class="container col-12" style="margin-top: 30vh">
+<div class="container" style="margin-top: 30vh">
     <div class="d-flex justify-content-center">
         <div>
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+{{--            @if ($errors->any())--}}
+{{--                <div class="alert alert-danger">--}}
+{{--                    <ul>--}}
+{{--                        @foreach ($errors->all() as $error)--}}
+{{--                            <li>{{ $error }}</li>--}}
+{{--                        @endforeach--}}
+{{--                    </ul>--}}
+{{--                </div>--}}
+{{--            @endif--}}
+                <div class="d-flex align">
+                    <h1 class="align-middle">Almost in</h1><div class="floating-img h1">{{ \Spatie\Emoji\Emoji::rocket() }}</div>
                 </div>
-            @endif
-            <h1 class="align-middle">Almost in {{ \Spatie\Emoji\Emoji::rocket() }}</h1>
-            <form action="{{ route('login.login') }}" method="POST">
+
+
+
+                <form action="{{ route('login.login') }}" method="POST">
                 @method('POST')
                 @csrf
-                <div class="col-3 d-block text-muted">
-                    <h6 class="mt-3">Email</h6>
-                    <input type="text" id="email" name="email" class="">
+                <div class="form-floating mb-3">
+                    <input type="text" id="inp-email" name="email" class="form-control @error('email')is-invalid @endif" placeholder="#">
+                    <label for="inp-email" class="text-muted @error('email')text-danger @endif ">Email</label>
+
                 </div>
-                <div class="col-3 d-block text-muted">
-                    <h6 class="mt-3" class="mt-3">Password</h6>
-                    <input type="password" name="password" >
+                <div class="form-floating">
+                    <input class="form-control @error('password')is-invalid @endif " type="password" name="password" id="inp-password" placeholder="#">
+                    <label for="inp-password" class=" text-muted @error('password')text-danger @endif ">Password</label>
                 </div>
                 <div class="text-center mt-3">
-                    <button type="submit" class="btn btn-secondary btn-block">Log in</button>
+                    <button type="submit" class="btn btn-outline-secondary btn-block">Log in</button>
                 </div>
             </form>
             <a href="{{ route('register') }}">Request account</a>

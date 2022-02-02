@@ -15,13 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::prefix('user')->middleware('auth')->group(function (){
+Route::prefix('auth')->middleware('auth')->group(function (){
     Route::get('/', 'HomeController@show')->name('home.show');
     Route::get('/sign-out', 'Auth\HomeController@signOut')->name('sign-out');
     Route::get('/dashboard', 'DashboardController@show')->name('dashboard.show');
     Route::get('/objects', 'ObjectsController@show')->name('objects.show');
     Route::get('/objects/create', 'ObjectsController@create')->name('object.create');
     Route::post('/objects/new', 'ObjectsController@createNew')->name('object.createNew');
+    Route::resource('profile', 'ProfileController');
+    Route::resource('comment', 'CommentController');
 });
 
 Route::get('/', 'GuestController@login')->name('login');

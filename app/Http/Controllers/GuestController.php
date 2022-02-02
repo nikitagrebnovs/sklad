@@ -31,7 +31,6 @@ class GuestController extends Controller
             return redirect()->intended(route('home.show'))
                 ->withSuccess('Signed in');
         }
-        dd('failed');
         return redirect()->route('home.show');
     }
     public function register()
