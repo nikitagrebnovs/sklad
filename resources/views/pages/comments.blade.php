@@ -84,12 +84,21 @@
                         <div class="chat-history" style="height: 800px; overflow: scroll; overflow-x: auto;">
                             <ul class="m-b-0">
                                 @foreach($comments as $comment)
-                                <li class="clearfix">
-                                    <div class="message-data">
-                                        <span class="message-data-time">{{ $comment->created_at->format('D h:i') }}</span>
-                                    </div>
-                                    <div class="message my-message"> <span class="text-success">{{ $comment->user->login }}</span><br>{{ $comment->content }}</div>
-                                </li>
+                                    @if($comment->user_id == auth()->user()->getAuthIdentifier())
+                                        <li class="clearfix">
+                                            <div class="message-data text-right">
+                                                <span class="text-right message-data-time">{{ $comment->created_at->format('D h:i') }}</span>
+                                                <div class="message other-message float-right"><span class="text-success">{{ $comment->user->login }}</span><br>{{ $comment->content }}</div>
+                                            </div>
+                                        </li>
+                                    @else
+                                        <li class="clearfix">
+                                            <div class="message-data">
+                                                <span class="message-data-time">{{ $comment->created_at->format('D h:i') }}</span>
+                                            </div>
+                                            <div class="message my-message"> <span class="text-success">{{ $comment->user->login }}</span><br>{{ $comment->content }}</div>
+                                        </li>
+                                        @endif
                                 @endforeach
                             </ul>
                         </div>
